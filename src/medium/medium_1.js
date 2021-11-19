@@ -10,7 +10,7 @@ import {variance} from "./data/stats_helpers.js";
 export function getSum(array) {
     var sum = 0;
     for (let idx = 0; idx < array.length; idx++) {
-        sum+= array[i];
+        sum+= array[idx];
     }
     return sum;
 }
