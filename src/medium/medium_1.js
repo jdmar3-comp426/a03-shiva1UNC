@@ -66,5 +66,6 @@ export function getStatistics(array) {
     stats.push(array.length);
     stats.push(getSum(array));
     stats.push(Math.sqrt(variance(array, mean)));
+    return stats;
 }
 
