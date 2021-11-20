@@ -71,21 +71,13 @@ export function getStatistics(array) {
 }
 
 function findMin(array) {
-/*   let copy = array.slice();
-    if (isNaN(Math.min(copy))) {
-        array.splice(copy.findIndex(n => isNaN(n)), 1);
-        if (isNaN(Math.min(copy))) {
-
+    let min = Number.MAX_VALUE;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] < min) {
+            min = array[i];
         }
-    } else {
-        return Math.min(array);
     }
-*/
-    let copy = array.slice();
-    while (isNaN(Math.min(copy))) {
-        array.splice(copy.findIndex(n => isNaN(n)), 1);
-    }
-    return Math.min(copy);
+    return min;
 }
 function findMax(array) {
 /*    if (isNaN(Math.max(array))) {
@@ -95,10 +87,12 @@ function findMax(array) {
         return Math.max(array);
     }
 */
-    let copy = array.slice();
-    while (isNaN(Math.max(copy))) {
-        array.splice(copy.findIndex(n => isNaN(n)), 1);
+    let max = Number.MIN_VALUE;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] > max) {
+            max = array[i];
+        }
     }
-    return Math.max(copy);
+    return max;
 }
 
