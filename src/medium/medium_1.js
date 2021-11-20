@@ -72,7 +72,7 @@ export function getStatistics(array) {
 
 function findMin(array) {
     if (isNaN(Math.min(array))) {
-        fruits.splice(array.findIndex(n => Number.isNaN(n)), 1);
+        array.splice(array.findIndex(n => Number.isNaN(n)), 1);
         return findMin(array);
     } else {
         return Math.min(array);
@@ -80,7 +80,7 @@ function findMin(array) {
 }
 function findMax(array) {
     if (isNaN(Math.max(array))) {
-        fruits.splice(array.findIndex(n => Number.isNaN(n)), 1);
+        array.splice(array.findIndex(n => Number.isNaN(n)), 1);
         return findMax(array);
     } else {
         return Math.max(array);
