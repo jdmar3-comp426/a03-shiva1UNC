@@ -65,7 +65,7 @@ export function getStatistics(array) {
         mean: avg,
         lengh: array.length,
         sum: getSum(array),
-        standard_deviation: Math.sqrt(variance(array, mean))
+        standard_deviation: Math.sqrt(variance(array, avg))
     };
     return stats;
 }
