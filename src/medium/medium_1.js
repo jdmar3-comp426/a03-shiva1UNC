@@ -57,29 +57,41 @@ export function getMedian(array) {
  */
 export function getStatistics(array) {
     var avg = getSum(array)/array.length;
-    return {
-        lengh: array.length,
-        sum: getSum(array),
-        mean: avg,
-        median: getMedian(array),
-        min: findMin(array),
-        max: findMax(array),
-        variance: variance(array, avg),
-        standard_deviation: Math.sqrt(variance(array, avg))
-    };
-  //  return stats;
-}
-
-function findMin(array) {
     let min = Number.MAX_VALUE;
     for (let i = 0; i < array.length; i++) {
         if (array[i] < min) {
             min = array[i];
         }
     }
-    return min;
+    let max = Number.MIN_VALUE;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] > max) {
+            max = array[i];
+        }
+    }
+    return {
+        lengh: array.length,
+        sum: getSum(array),
+        mean: avg,
+        median: getMedian(array),
+        min: min,
+        max: max,
+        variance: variance(array, avg),
+        standard_deviation: Math.sqrt(variance(array, avg))
+    };
+
 }
-function findMax(array) {
+
+//function findMin(array) {
+/*    let min = Number.MAX_VALUE;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] < min) {
+            min = array[i];
+        }
+    }
+    return min; */
+//}
+//function findMax(array) {
 /*    if (isNaN(Math.max(array))) {
         array.splice(array.findIndex(n => isNaN(n)), 1);
         return findMax(array);
@@ -87,12 +99,12 @@ function findMax(array) {
         return Math.max(array);
     }
 */
-    let max = Number.MIN_VALUE;
+/*    let max = Number.MIN_VALUE;
     for (let i = 0; i < array.length; i++) {
         if (array[i] > max) {
             max = array[i];
         }
     }
-    return max;
-}
+    return max; */
+//}
 
