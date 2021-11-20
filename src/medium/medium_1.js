@@ -56,7 +56,6 @@ export function getMedian(array) {
  }
  */
 export function getStatistics(array) {
-    const stats = [];
     var avg = getSum(array)/array.length;
     let stats = {
         min: Math.min(array),
