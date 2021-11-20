@@ -58,9 +58,9 @@ export function getMedian(array) {
 export function getStatistics(array) {
     var avg = getSum(array)/array.length;
     let stats = {
-        min: Math.min(array),
+        min: findMin(array),
         median: getMedian(array),
-        max: Math.max(array),
+        max: findMax(array),
         variance: variance(array, avg),
         mean: avg,
         lengh: array.length,
@@ -68,5 +68,22 @@ export function getStatistics(array) {
         standard_deviation: Math.sqrt(variance(array, avg))
     };
     return stats;
+}
+
+function findMin(array) {
+    if (Math.min(array) == NaN) {
+        fruits.splice(array.indexOf(NaN), 1);
+        return findMin(array);
+    } else {
+        return Math.min(array);
+    }
+}
+function findMax(array) {
+    if (Math.max(array) == NaN) {
+        fruits.splice(array.indexOf(NaN), 1);
+        return findMax(array);
+    } else {
+        return Math.max(array);
+    }
 }
 
