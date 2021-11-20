@@ -62,7 +62,6 @@ export function getStatistics(array) {
         sum: getSum(array),
         mean: avg,
         median: getMedian(array),
-        max2: findMax(array),
         min: findMin(array),
         max: findMax(array),
         variance: variance(array, avg),
@@ -72,19 +71,34 @@ export function getStatistics(array) {
 }
 
 function findMin(array) {
-    if (isNaN(Math.min(array))) {
-        array.splice(array.findIndex(n => isNaN(n)), 1);
-        return findMin(array);
+/*   let copy = array.slice();
+    if (isNaN(Math.min(copy))) {
+        array.splice(copy.findIndex(n => isNaN(n)), 1);
+        if (isNaN(Math.min(copy))) {
+
+        }
     } else {
         return Math.min(array);
     }
+*/
+    let copy = array.slice();
+    while (isNaN(Math.min(copy))) {
+        array.splice(copy.findIndex(n => isNaN(n)), 1);
+    }
+    return Math.min(copy);
 }
 function findMax(array) {
-    if (isNaN(Math.max(array))) {
+/*    if (isNaN(Math.max(array))) {
         array.splice(array.findIndex(n => isNaN(n)), 1);
         return findMax(array);
     } else {
         return Math.max(array);
     }
+*/
+    let copy = array.slice();
+    while (isNaN(Math.max(copy))) {
+        array.splice(copy.findIndex(n => isNaN(n)), 1);
+    }
+    return Math.max(copy);
 }
 
