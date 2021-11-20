@@ -62,6 +62,7 @@ export function getStatistics(array) {
         sum: getSum(array),
         mean: avg,
         median: getMedian(array),
+        max2: findMax(array),
         min: findMin(array),
         max: findMax(array),
         variance: variance(array, avg),
