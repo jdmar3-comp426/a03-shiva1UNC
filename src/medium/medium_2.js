@@ -22,7 +22,7 @@ see under the methods section
 export const allCarStats = {
     avgMpg: findAvgMpg(mpg_data),
     allYearStats: getStatistics(mpg_data),
-    ratioHybrids: undefined,
+    ratioHybrids: findRatioHybrids(mpg_data),
 };
 
 function findAvgMpg(array) {
@@ -34,14 +34,14 @@ function findAvgMpg(array) {
     }
     return avgMpg/array.length;
 }
-findRatioHybrids(array) {
+function findRatioHybrids(array) {
     let numHybrids = 0;
     array.forEach(element => {
-        if (!element.hybrid) {
+        if (element.hybrid) {
             numHybrids++;
         }
     });
-    return numHybrids;
+    return numHybrids/array.length;
 }
 
 /**
