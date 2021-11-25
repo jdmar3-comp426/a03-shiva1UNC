@@ -69,7 +69,7 @@ export function getStatistics(array) {
             max = array[i];
         }
     }
-    return {
+    const stats = {
         lengh: array.length,
         sum: getSum(array),
         mean: avg,
@@ -79,7 +79,7 @@ export function getStatistics(array) {
         variance: variance(array, avg),
         standard_deviation: Math.sqrt(variance(array, avg))
     };
-
+    return stats;
 }
 
 //function findMin(array) {
