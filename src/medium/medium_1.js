@@ -57,13 +57,13 @@ export function getMedian(array) {
  */
 export function getStatistics(array) {
     var avg = getSum(array)/array.length;
-    let min = Number.MAX_VALUE;
+    let min = 1000000;
     for (let i = 0; i < array.length; i++) {
         if (array[i] < min) {
             min = array[i];
         }
     }
-    let max = Number.MIN_VALUE;
+    let max = -1000000;
     for (let i = 0; i < array.length; i++) {
         if (array[i] > max) {
             max = array[i];
