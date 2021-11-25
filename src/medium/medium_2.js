@@ -21,7 +21,7 @@ see under the methods section
  */
 export const allCarStats = {
     avgMpg: findAvgMpg(mpg_data),
-    allYearStats: getStatistics(mpg_data),
+    allYearStats: getYearStats(mpg_data),
     ratioHybrids: findRatioHybrids(mpg_data),
 };
 
@@ -42,6 +42,13 @@ function findRatioHybrids(array) {
         }
     });
     return numHybrids/array.length;
+}
+function getYearStats(array) {
+    const years = [];
+    array.forEach(function(item) {
+        years.push(item.year);
+    });
+    return getStatistics(years);
 }
 
 /**
