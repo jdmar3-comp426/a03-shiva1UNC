@@ -56,17 +56,17 @@ export function getMedian(array) {
  }
  */
 export function getStatistics(array) {
-    var avg = getSum(array)/array.length;
-    let min = 1000000;
+    let avg = getSum(array)/array.length;
+    let min = Number.MAX_VALUE;
     for (let i = 0; i < array.length; i++) {
         if (array[i] < min) {
             min = array[i];
         }
     }
-    let max = -1000000;
-    for (let i = 0; i < array.length; i++) {
-        if (array[i] > max) {
-            max = array[i];
+    let max = Number.MIN_VALUE;
+    for (let j = 0; j < array.length; j++) {
+        if (array[j] > max) {
+            max = array[j];
         }
     }
     const stats = {
