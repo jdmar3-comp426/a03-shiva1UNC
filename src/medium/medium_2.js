@@ -201,23 +201,25 @@ function getAvgMpgByYear(array) {
     // return avg_mpg;
 
     let avg_mpg = new Object();
-    array.forEach(function (item) {
-        if (Object.keys(avg_mpg).indexOf(item.year) == -1) {
-            avg_mpg[item.year] = {
+    let year = 0;
+    array.forEach(function (item, array) {
+        year = item.year;
+        if (Object.keys(avg_mpg).indexOf(year) == -1) {
+            avg_mpg[year] = {
                 hybrid: {
-                    city: findCityMpg(mpg_data.filter(function (currentValue) {
-                        return (currentValue.year == year) && currentValue.hybrid;
+                    city: findCityMpg(mpg_data.filter(function (element) {
+                        return (element.year == year) && element.hybrid;
                     })),
-                    highway: findHwyMpg(mpg_data.filter(function (currentValue) {
-                        return (currentValue.year == year) && currentValue.hybrid;
+                    highway: findHwyMpg(mpg_data.filter(function (element) {
+                        return (element.year == year) && element.hybrid;
                     }))
                 },
                 notHybrid: {
-                    city: findCityMpg(mpg_data.filter(function (currentValue) {
-                        return (currentValue.year == year) && (currentValue.hybrid == false);
+                    city: findCityMpg(mpg_data.filter(function (element) {
+                        return (element.year == year) && (element.hybrid == false);
                     })),
-                    highway: findHwyMpg(mpg_data.filter(function (currentValue) {
-                        return (currentValue.year == year) && (currentValue.hybrid == false);
+                    highway: findHwyMpg(mpg_data.filter(function (element) {
+                        return (element.year == year) && (element.hybrid == false);
                     }))
                 }
             }
