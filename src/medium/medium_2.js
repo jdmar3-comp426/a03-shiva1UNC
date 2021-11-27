@@ -153,7 +153,7 @@ function getAvgMpgByYear(array) {
     var idx;
     const avg_mpg = new Object();
     array.forEach(function(item){
-        idx = avg_mpg.keys.indexOf(item.year);
+        idx = avg_mpg.keys().indexOf(item.year);
         if (idx == -1) {
             avg_mpg[item.year] = {
                 hybrid: {
