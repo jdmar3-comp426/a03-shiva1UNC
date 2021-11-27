@@ -155,9 +155,8 @@ function getMakerHybrids(array) {
 }
 
 function getAvgMpgByYear(array) {
-    let year = 0;
-    const avg_mpg = new Object();
-    avg_mpg = {
+//     let year = 0;
+    const avg_mpg = {
         2009: {
             hybrid: {
                 city: findCityMpg(array),
@@ -199,6 +198,7 @@ function getAvgMpgByYear(array) {
             }
         }
     }
+    return avg_mpg;
 
 
         // avg_mpg[item] = {
