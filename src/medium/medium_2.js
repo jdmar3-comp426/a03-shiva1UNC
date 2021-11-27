@@ -200,9 +200,9 @@ function getAvgMpgByYear(array) {
     // }
     // return avg_mpg;
 
-    let avg_mpg = new Object();
+    let avg_mpg = {};
     let year = 0;
-    array.forEach(function (item, array) {
+    array.forEach(function (item) {
         year = item.year;
         if (Object.keys(avg_mpg).indexOf(year) == -1) {
             avg_mpg[year] = {
