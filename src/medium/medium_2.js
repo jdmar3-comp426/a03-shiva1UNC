@@ -29,14 +29,14 @@ export const allCarStats = {
 };
 
 function findCityMpg(array) {
-    var mpgSum = 0;
+    let mpgSum = 0;
     array.forEach(function(item){
         mpgSum+= item.city_mpg;
     });
     return mpgSum/array.length;
 }
 function findHwyMpg(array) {
-    var mpgSum = 0;
+    let mpgSum = 0;
     array.forEach(function(item){
         mpgSum+= item.highway_mpg;
     });
@@ -44,15 +44,15 @@ function findHwyMpg(array) {
 }
 function findRatioHybrids(array) {
     let numHybrids = 0;
-    array.forEach(element => {
-        if (element.hybrid) {
+    array.forEach(function(item){
+        if (item.hybrid) {
             numHybrids++;
         }
     });
     return numHybrids/array.length;
 }
 function getYearStats(array) {
-    const years = [];
+    let years = [];
     array.forEach(function(item) {
         years.push(item.year);
     });
