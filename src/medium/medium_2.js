@@ -155,70 +155,74 @@ function getMakerHybrids(array) {
 }
 
 function getAvgMpgByYear(array) {
-//     let year = 0;
-    const avg_mpg = {
-        2009: {
-            hybrid: {
-                city: findCityMpg(array),
-                highway: findHwyMpg(array)
-            },
-            notHybrid: {
-                city: findCityMpg(array),
-                highway: findHwyMpg(array)
-            }
-        },
-        2010: {
-            hybrid: {
-                city: findCityMpg(array),
-                highway: findHwyMpg(array)
-            },
-            notHybrid: {
-                city: findCityMpg(array),
-                highway: findHwyMpg(array)
-            }
-        },
-        2011: {
-            hybrid: {
-                city: findCityMpg(array),
-                highway: findHwyMpg(array)
-            },
-            notHybrid: {
-                city: findCityMpg(array),
-                highway: findHwyMpg(array)
-            }
-        },
-        2012: {
-            hybrid: {
-                city: findCityMpg(array),
-                highway: findHwyMpg(array)
-            },
-            notHybrid: {
-                city: findCityMpg(array),
-                highway: findHwyMpg(array)
+    //     let year = 0;
+    // const avg_mpg = {
+    //     2009: {
+    //         hybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         },
+    //         notHybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         }
+    //     },
+    //     2010: {
+    //         hybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         },
+    //         notHybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         }
+    //     },
+    //     2011: {
+    //         hybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         },
+    //         notHybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         }
+    //     },
+    //     2012: {
+    //         hybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         },
+    //         notHybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         }
+    //     }
+    // }
+    // return avg_mpg;
+
+    let avg_mpg = new Object();
+    array.forEach(function (item) {
+        if (Object.keys(avg_mpg).indexOf(item.year) == -1) {
+            avg_mpg[item.year] = {
+                hybrid: {
+                    city: findCityMpg(mpg_data.filter(function (currentValue) {
+                        return (currentValue.year == year) && currentValue.hybrid;
+                    })),
+                    highway: findHwyMpg(mpg_data.filter(function (currentValue) {
+                        return (currentValue.year == year) && currentValue.hybrid;
+                    }))
+                },
+                notHybrid: {
+                    city: findCityMpg(mpg_data.filter(function (currentValue) {
+                        return (currentValue.year == year) && (currentValue.hybrid == false);
+                    })),
+                    highway: findHwyMpg(mpg_data.filter(function (currentValue) {
+                        return (currentValue.year == year) && (currentValue.hybrid == false);
+                    }))
+                }
             }
         }
-    }
-    return avg_mpg;
-
-
-        // avg_mpg[item] = {
-        //     hybrid: {
-        //         city: findCityMpg(mpg_data.filter(function (currentValue) {
-        //             return (currentValue.year == year) && currentValue.hybrid;
-        //         })),
-        //         highway: findHwyMpg(mpg_data.filter(function (currentValue) {
-        //             return (currentValue.year == year) && currentValue.hybrid;
-        //         }))
-        //     },
-        //     notHybrid: {
-        //         city: findCityMpg(mpg_data.filter(function (currentValue) {
-        //             return (currentValue.year == year) && (currentValue.hybrid == false);
-        //         })),
-        //         highway: findHwyMpg(mpg_data.filter(function (currentValue) {
-        //             return (currentValue.year == year) && (currentValue.hybrid == false);
-        //         }))
-        //     }
-        // }
+    });
 }
 // function checkCar(car, year, isHybrid) {
 //     if (isHybrid) { return (car.year == year) && (isHybrid); }
