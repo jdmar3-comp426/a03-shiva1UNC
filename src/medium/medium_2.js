@@ -118,7 +118,7 @@ function getYearStats(array) {
  */
 export const moreStats = {
     makerHybrids: getMakerHybrids(mpg_data),
-    avgMpgByYearAndHybrid: undefined
+    avgMpgByYearAndHybrid: getAvgMpgByYear(mpg_data)
 };
 
 function getMakerHybrids(array) {
@@ -147,4 +147,24 @@ function getMakerHybrids(array) {
         }
     })
     return hybrid_models;
+}
+
+function getAvgMpgByYear(array) {
+    var idx;
+    const avg_mpg;
+    array.forEach(function(item){
+        idx = avg_mpg.keys.indexOf(item.year);
+        if (idx == -1) {
+            avg_mpg[item.year] = {
+                hybrid: {
+                    city: findCityMpg(array.filter(car => (car.year == item.year && car.hybrid))),
+                    highway: findHwyMpg(array.filter(car => (car.year == item.year && car.hybrid)))
+                },
+                notHybrid: {
+                    city: findCityMpg(array.filter(car => (car.year == item.year && !car.hybrid))),
+                    highway: findHwyMpg(array.filter(car => (car.year == item.year && !car.hybrid)))
+                }
+            }
+        }
+    });
 }
