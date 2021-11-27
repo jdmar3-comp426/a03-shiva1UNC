@@ -162,19 +162,23 @@ function getAvgMpgByYear(array) {
         2011: undefined,
         2012: undefined
     };
-    array.forEach(function(item){
+    array.forEach(function(array, item){
 //        idx = Object.keys(avg_mpg).indexOf(item.year);
         if (avg_mpg[item.year] == undefined) {
             avg_mpg[item.year] = {
                 hybrid: {
-                    city: findCityMpg(array.filter(car => (car.year == item.year && car.hybrid))),
-                    highway: findHwyMpg(array.filter(car => (car.year == item.year && car.hybrid)))
+                    city: findCityMpg(array.filter(checkCar)),
+                    highway: findHwyMpg(array.filter(checkCar))
                 },
                 notHybrid: {
-                    city: findCityMpg(array.filter(car => (car.year == item.year && !car.hybrid))),
-                    highway: findHwyMpg(array.filter(car => (car.year == item.year && !car.hybrid)))
+                    city: findCityMpg(array.filter(checkCar)),
+                    highway: findHwyMpg(array.filter(checkCar))
                 }
             }
         }
     });
+}
+function checkCar(car, year, isHybrid) {
+    if (isHybrid){return (car.year == year) && (isHybrid);}
+    else {return (car.year == year) && (!isHybrid);}
 }
