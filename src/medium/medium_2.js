@@ -156,10 +156,15 @@ function getMakerHybrids(array) {
 
 function getAvgMpgByYear(array) {
     var idx;
-    const avg_mpg = {};
+    const avg_mpg = {
+        2009: undefined,
+        2010: undefined,
+        2011: undefined,
+        2012: undefined
+    };
     array.forEach(function(item){
-        idx = Object.keys(avg_mpg).indexOf(item.year);
-        if (idx == -1) {
+//        idx = Object.keys(avg_mpg).indexOf(item.year);
+        if (avg_mpg[item.year] == undefined) {
             avg_mpg[item.year] = {
                 hybrid: {
                     city: findCityMpg(array.filter(car => (car.year == item.year && car.hybrid))),
