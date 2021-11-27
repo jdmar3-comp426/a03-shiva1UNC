@@ -225,6 +225,7 @@ function getAvgMpgByYear(array) {
             }
         }
     });
+    return avg_mpg;
 }
 // function checkCar(car, year, isHybrid) {
 //     if (isHybrid) { return (car.year == year) && (isHybrid); }
