@@ -43,7 +43,17 @@ export function searchHighPower(car_data, minHorsepower, minTorque) {
  *
  */
 export function searchMpg(car_data, minCity, minHighway) {
-
+    return car_data.filter(function(element) {
+        return (element.highway_mpg >= minHighway) && (element.city_mpg >= minCity);
+    }).sort(function(a, b){
+        if (a.highway_mpg > b.highway_mpg){
+            return -1;
+        } else if (a.highway_mpg < b.highway_mpg){
+            return 1;
+        } else {
+            return 0;
+        }
+    });
 }
 
 
