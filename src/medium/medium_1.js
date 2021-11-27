@@ -82,29 +82,3 @@ export function getStatistics(array) {
     return stats;
 }
 
-//function findMin(array) {
-/*    let min = Number.MAX_VALUE;
-    for (let i = 0; i < array.length; i++) {
-        if (array[i] < min) {
-            min = array[i];
-        }
-    }
-    return min; */
-//}
-//function findMax(array) {
-/*    if (isNaN(Math.max(array))) {
-        array.splice(array.findIndex(n => isNaN(n)), 1);
-        return findMax(array);
-    } else {
-        return Math.max(array);
-    }
-*/
-/*    let max = Number.MIN_VALUE;
-    for (let i = 0; i < array.length; i++) {
-        if (array[i] > max) {
-            max = array[i];
-        }
-    }
-    return max; */
-//}
-
