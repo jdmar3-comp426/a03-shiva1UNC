@@ -70,7 +70,7 @@ export function getStatistics(array) {
         }
     }
     const stats = {
-        lengh: array.length,
+        length: array.length,
         sum: getSum(array),
         mean: avg,
         median: getMedian(array),
