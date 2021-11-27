@@ -122,11 +122,29 @@ export const moreStats = {
 };
 
 function getMakerHybrids(array) {
-    const hybrids = [];
-    let current_make = array[0].make;
-    for (let i = 0; i < array.length; i++) {
-        if (array[i].make == current_make) {
-            
+    const hybrid_models = [];
+    var idx;
+    array.forEach(function(item){
+        if(item.hybrid) {
+            idx = hybrid_models.findIndex((element) => element.make == item.make);
+            if (idx != -1) {
+                hybrid_models[idx].hybrids.push(item.id);
+            } else {
+                hybrid_models.push({
+                    "make": item.make,
+                    "hybrids": [item.id]
+                });
+            }
         }
-    }
+    });
+    hybrid_models.sort(function(a, b){
+        if (a.hybrids.length > b.hybrids.length) {
+            return -1;
+        } else if (a.hybrids.length < b.hybrids.length) {
+            return 1;
+        } else {
+            return 0;
+        }
+    })
+    return hybrid_models;
 }
