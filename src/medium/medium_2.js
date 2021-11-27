@@ -151,7 +151,7 @@ function getMakerHybrids(array) {
 
 function getAvgMpgByYear(array) {
     var idx;
-    const avg_mpg;
+    const avg_mpg = new Object();
     array.forEach(function(item){
         idx = avg_mpg.keys.indexOf(item.year);
         if (idx == -1) {
