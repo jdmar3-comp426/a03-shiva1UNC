@@ -1,5 +1,5 @@
 import mpg_data from "./data/mpg_data.js";
-import {getStatistics} from "./medium_1.js";
+import { getStatistics } from "./medium_1.js";
 
 /*
 This section can be done by using the array prototype functions.
@@ -30,30 +30,30 @@ export const allCarStats = {
 
 function findCityMpg(array) {
     let mpgSum = 0;
-    array.forEach(function(item){
-        mpgSum+= item.city_mpg;
+    array.forEach(function (item) {
+        mpgSum += item.city_mpg;
     });
-    return mpgSum/array.length;
+    return mpgSum / array.length;
 }
 function findHwyMpg(array) {
     let mpgSum = 0;
-    array.forEach(function(item){
-        mpgSum+= item.highway_mpg;
+    array.forEach(function (item) {
+        mpgSum += item.highway_mpg;
     });
-    return mpgSum/array.length;
+    return mpgSum / array.length;
 }
 function findRatioHybrids(array) {
     let numHybrids = 0;
-    array.forEach(function(item){
+    array.forEach(function (item) {
         if (item.hybrid) {
             numHybrids++;
         }
     });
-    return numHybrids/array.length;
+    return numHybrids / array.length;
 }
 function getYearStats(array) {
     let years = [];
-    array.forEach(function(item) {
+    array.forEach(function (item) {
         years.push(item.year);
     });
     return getStatistics(years);
@@ -124,9 +124,9 @@ export const moreStats = {
 function getMakerHybrids(array) {
     const hybrid_models = [];
     var idx = -1;
-    array.forEach(function(item){
-        if(item.hybrid) {
-            if(hybrid_models.length != 0){idx = hybrid_models.findIndex((element) => element.make === item.make);}
+    array.forEach(function (item) {
+        if (item.hybrid) {
+            if (hybrid_models.length != 0) { idx = hybrid_models.findIndex((element) => element.make === item.make); }
             if (idx != -1) {
                 hybrid_models[idx].hybrids.push(item.id);
             } else {
@@ -142,7 +142,7 @@ function getMakerHybrids(array) {
             // }
         }
     });
-    hybrid_models.sort(function(a, b){
+    hybrid_models.sort(function (a, b) {
         if (a.hybrids.length > b.hybrids.length) {
             return -1;
         } else if (a.hybrids.length < b.hybrids.length) {
@@ -155,30 +155,35 @@ function getMakerHybrids(array) {
 }
 
 function getAvgMpgByYear(array) {
-    var idx;
+    let year = 0;
     const avg_mpg = {
         2009: undefined,
         2010: undefined,
         2011: undefined,
         2012: undefined
     };
-    array.forEach(function(array, item){
-//        idx = Object.keys(avg_mpg).indexOf(item.year);
-        if (avg_mpg[item.year] == undefined) {
-            avg_mpg[item.year] = {
-                hybrid: {
-                    city: findCityMpg(array.filter(checkCar)),
-                    highway: findHwyMpg(array.filter(checkCar))
-                },
-                notHybrid: {
-                    city: findCityMpg(array.filter(checkCar)),
-                    highway: findHwyMpg(array.filter(checkCar))
-                }
+    Object.keys(avg_mpg).forEach(function (array, item) {
+        avg_mpg[item] = {
+            hybrid: {
+                city: findCityMpg(array.filter(function (currentValue) {
+                    return (currentValue.year == year) && currentValue.hybrid;
+                })),
+                highway: findHwyMpg(array.filter(function (currentValue) {
+                    return (currentValue.year == year) && currentValue.hybrid;
+                }))
+            },
+            notHybrid: {
+                city: findCityMpg(array.filter(function (currentValue) {
+                    return (currentValue.year == year) && (currentValue.hybrid == false);
+                })),
+                highway: findHwyMpg(array.filter(function (currentValue) {
+                    return (currentValue.year == year) && (currentValue.hybrid == false);
+                }))
             }
         }
     });
 }
-function checkCar(car, year, isHybrid) {
-    if (isHybrid){return (car.year == year) && (isHybrid);}
-    else {return (car.year == year) && (!isHybrid);}
-}
+// function checkCar(car, year, isHybrid) {
+//     if (isHybrid) { return (car.year == year) && (isHybrid); }
+//     else { return (car.year == year) && (!isHybrid); }
+// }
