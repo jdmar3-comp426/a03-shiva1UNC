@@ -117,6 +117,16 @@ function getYearStats(array) {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
+    makerHybrids: getMakerHybrids(mpg_data),
     avgMpgByYearAndHybrid: undefined
 };
+
+function getMakerHybrids(array) {
+    const hybrids = [];
+    let current_make = array[0].make;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i].make == current_make) {
+            
+        }
+    }
+}
