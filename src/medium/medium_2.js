@@ -154,7 +154,7 @@ function getMakerHybrids(array) {
     return hybrid_models;
 }
 
-function getAvgMpgByYear(array) {
+function getAvgMpgByYear(mpg_data) {
     let year = 0;
     const avg_mpg = {
         2009: undefined,
@@ -165,18 +165,18 @@ function getAvgMpgByYear(array) {
     Object.keys(avg_mpg).forEach(function (array, item) {
         avg_mpg[item] = {
             hybrid: {
-                city: findCityMpg(array.filter(function (currentValue) {
+                city: findCityMpg(mpg_data.filter(function (currentValue) {
                     return (currentValue.year == year) && currentValue.hybrid;
                 })),
-                highway: findHwyMpg(array.filter(function (currentValue) {
+                highway: findHwyMpg(mpg_data.filter(function (currentValue) {
                     return (currentValue.year == year) && currentValue.hybrid;
                 }))
             },
             notHybrid: {
-                city: findCityMpg(array.filter(function (currentValue) {
+                city: findCityMpg(mpg_data.filter(function (currentValue) {
                     return (currentValue.year == year) && (currentValue.hybrid == false);
                 })),
-                highway: findHwyMpg(array.filter(function (currentValue) {
+                highway: findHwyMpg(mpg_data.filter(function (currentValue) {
                     return (currentValue.year == year) && (currentValue.hybrid == false);
                 }))
             }
