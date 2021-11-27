@@ -123,18 +123,23 @@ export const moreStats = {
 
 function getMakerHybrids(array) {
     const hybrid_models = [];
-    var idx;
+    var idx = -1;
     array.forEach(function(item){
         if(item.hybrid) {
-            idx = hybrid_models.findIndex((element) => element.make == item.make);
+            if(hybrid_models.length != 0){idx = hybrid_models.findIndex((element) => element.make === item.make);}
             if (idx != -1) {
                 hybrid_models[idx].hybrids.push(item.id);
             } else {
                 hybrid_models.push({
                     "make": item.make,
-                    "hybrids": [item.id]
+                    "hybrids": new Array(item.id)
                 });
             }
+            // for (let i = 0; i < hybrid_models.length; i++) {
+            //     if (hybrid_models[i].make === item.make) {
+            //         hybrid_models[i].hybrids.push(item.id);
+            //     }
+            // }
         }
     });
     hybrid_models.sort(function(a, b){
