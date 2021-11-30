@@ -16,12 +16,10 @@
  */
 export const repeat = (fn, n, ...params) => {
     let return_vals = [];
-    var val;
     for (let i = 0; i < n; i++) {
         val = fn(params);
-        return_vals.push(val);
     }
-    return return_vals;
+    return fn(params);
 };
 
 
