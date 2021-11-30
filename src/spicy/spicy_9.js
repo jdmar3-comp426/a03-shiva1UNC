@@ -31,7 +31,7 @@ export const repeatDemo = () => {
     function fn(array) {
         console.log(array);
     }
-    repeat(fn, 10, ['Hello, world!']);
+    repeat(fn, 10, ...['Hello, world!']);
 };
 
 
