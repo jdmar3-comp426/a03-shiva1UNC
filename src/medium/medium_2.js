@@ -1,5 +1,5 @@
 import mpg_data from "./data/mpg_data.js";
-import {getStatistics} from "./medium_1.js";
+import { getStatistics } from "./medium_1.js";
 
 /*
 This section can be done by using the array prototype functions.
@@ -20,11 +20,44 @@ see under the methods section
  * @param {allCarStats.ratioHybrids} ratio of cars that are hybrids
  */
 export const allCarStats = {
-    avgMpg: undefined,
-    allYearStats: undefined,
-    ratioHybrids: undefined,
+    avgMpg: {
+        city: findCityMpg(mpg_data),
+        highway: findHwyMpg(mpg_data)
+    },
+    allYearStats: getYearStats(mpg_data),
+    ratioHybrids: findRatioHybrids(mpg_data),
 };
 
+function findCityMpg(array) {
+    let mpgSum = 0;
+    array.forEach(function (item) {
+        mpgSum += item.city_mpg;
+    });
+    return mpgSum / array.length;
+}
+function findHwyMpg(array) {
+    let mpgSum = 0;
+    array.forEach(function (item) {
+        mpgSum += item.highway_mpg;
+    });
+    return mpgSum / array.length;
+}
+function findRatioHybrids(array) {
+    let numHybrids = 0;
+    array.forEach(function (item) {
+        if (item.hybrid) {
+            numHybrids++;
+        }
+    });
+    return numHybrids / array.length;
+}
+function getYearStats(array) {
+    let years = [];
+    array.forEach(function (item) {
+        years.push(item.year);
+    });
+    return getStatistics(years);
+}
 
 /**
  * HINT: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
@@ -84,6 +117,117 @@ export const allCarStats = {
  * }
  */
 export const moreStats = {
-    makerHybrids: undefined,
-    avgMpgByYearAndHybrid: undefined
+    makerHybrids: getMakerHybrids(mpg_data),
+    avgMpgByYearAndHybrid: getAvgMpgByYear(mpg_data)
 };
+
+function getMakerHybrids(array) {
+    const hybrid_models = [];
+    var idx = -1;
+    array.forEach(function (item) {
+        if (item.hybrid) {
+            if (hybrid_models.length != 0) { idx = hybrid_models.findIndex((element) => element.make === item.make); }
+            if (idx != -1) {
+                hybrid_models[idx].hybrids.push(item.id);
+            } else {
+                hybrid_models.push({
+                    "make": item.make,
+                    "hybrids": new Array(item.id)
+                });
+            }
+            // for (let i = 0; i < hybrid_models.length; i++) {
+            //     if (hybrid_models[i].make === item.make) {
+            //         hybrid_models[i].hybrids.push(item.id);
+            //     }
+            // }
+        }
+    });
+    hybrid_models.sort(function (a, b) {
+        if (a.hybrids.length > b.hybrids.length) {
+            return -1;
+        } else if (a.hybrids.length < b.hybrids.length) {
+            return 1;
+        } else {
+            return 0;
+        }
+    })
+    return hybrid_models;
+}
+
+function getAvgMpgByYear(array) {
+    //     let year = 0;
+    // const avg_mpg = {
+    //     2009: {
+    //         hybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         },
+    //         notHybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         }
+    //     },
+    //     2010: {
+    //         hybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         },
+    //         notHybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         }
+    //     },
+    //     2011: {
+    //         hybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         },
+    //         notHybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         }
+    //     },
+    //     2012: {
+    //         hybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         },
+    //         notHybrid: {
+    //             city: findCityMpg(array),
+    //             highway: findHwyMpg(array)
+    //         }
+    //     }
+    // }
+    // return avg_mpg;
+
+    let avg_mpg = {};
+    let year = 0;
+    array.forEach(function (item) {
+        year = item.year;
+        if (Object.keys(avg_mpg).indexOf(year) == -1) {
+            avg_mpg[year] = {
+                hybrid: {
+                    city: findCityMpg(mpg_data.filter(function (element) {
+                        return (element.year == year) && element.hybrid;
+                    })),
+                    highway: findHwyMpg(mpg_data.filter(function (element) {
+                        return (element.year == year) && element.hybrid;
+                    }))
+                },
+                notHybrid: {
+                    city: findCityMpg(mpg_data.filter(function (element) {
+                        return (element.year == year) && (element.hybrid == false);
+                    })),
+                    highway: findHwyMpg(mpg_data.filter(function (element) {
+                        return (element.year == year) && (element.hybrid == false);
+                    }))
+                }
+            }
+        }
+    });
+    return avg_mpg;
+}
+// function checkCar(car, year, isHybrid) {
+//     if (isHybrid) { return (car.year == year) && (isHybrid); }
+//     else { return (car.year == year) && (!isHybrid); }
+// }
